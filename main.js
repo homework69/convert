@@ -14,30 +14,30 @@ const input = document.querySelector('#input')
 const result = document.querySelector('#result')
 const select = document.querySelector('#select')
 
-getCurrentcies()
+
 async function getCurrentcies() {
-    const response = await fetch('https://nbu.uz/exchange-rates/json/')
+    const response = await fetch('https://cbu.uz/ru/arkhiv-kursov-valyut/json/')
     const data = await response.json()
     const result = await data
-    console.log(result);
 
-    rates.USD = result[23]
-    rates.EUR = result[7]
-    rates.GBP = result[18]
+    rates.USD = result[0]
+    rates.EUR = result[1]
+    rates.GBP = result[3]
 
 
-    elementUSD.textContent = rates.USD.nbu_cell_price
-    elementEUR.textContent = rates.EUR.nbu_cell_price
-    elementGBP.textContent = rates.GBP.nbu_cell_price
+    elementUSD.textContent = rates.USD.Rate
+    elementEUR.textContent = rates.EUR.Rate
+    elementGBP.textContent = rates.GBP.Rate
 }
+getCurrentcies()
 
 input.oninput = function () {
-    result.value = parseFloat(input.value) / rates[select.value].nbu_cell_price
+    result.value = parseFloat(input.value) / rates[select.value].Rate
 }
 select.oninput = function () {
-    result.value = parseFloat(input.value) / rates[select.value].nbu_cell_price
+    result.value = parseFloat(input.value) / rates[select.value].Rate
 }
 
 function convertValue() { 
-    result.value = parseFloat(input.value) / rates[select.value].nbu_cell_price
+    result.value = parseFloat(input.value) / rates[select.value].Rate
  }
